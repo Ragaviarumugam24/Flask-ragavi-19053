@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+
+{% block title %}Order Successful - Krishna Store{% endblock %}
+
+{% block content %}
+<section class="py-32 text-center">
+    <div class="max-w-4xl mx-auto print-section">
+        <div class="w-48 h-48 mx-auto mb-12 bg-gradient-to-r from-green-400 to-emerald-500 rounded-3xl flex items-center justify-center shadow-2xl animate-bounce">
+            <i class="fas fa-check-circle text-7xl text-white"></i>
+        </div>
+        
+        <h1 class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-green-500 via-emerald-600 to-green-700 bg-clip-text text-transparent mb-6 leading-tight">
+            Order Placed Successfully!
+        </h1>
+        
+        <p class="text-2xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+            Thank you <span class="font-bold text-green-600">{{ name }}</span>! Your order has been confirmed.
+        </p>
+        
+        <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-12 shadow-2xl border border-white/50 max-w-4xl mx-auto mb-16 animate-on-scroll">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                <div class="group transform hover:scale-105 transition-all duration-300">
+                    <div class="w-24 h-24 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-3xl mx-auto mb-6 flex items-center justify-center shadow-2xl group-hover:shadow-3xl group-hover:rotate-12 transition-all duration-500">
+                        <i class="fas fa-receipt text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Order Confirmed</h3>
+                    <p class="text-lg text-gray-600 font-mono">
+                        Order #<span class="font-bold text-green-600 text-xl">KS{{ range(1000, 10000) | random }}</span>
+                    </p>
+                </div>
+                
+                <div class="group transform hover:scale-105 transition-all duration-300">
+                    <div class="w-24 h-24 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-3xl mx-auto mb-6 flex items-center justify-center shadow-2xl group-hover:shadow-3xl group-hover:-rotate-12 transition-all duration-500">
+                        <i class="fas fa-shipping-fast text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Processing</h3>
+                    <p class="text-lg text-gray-600">Your order is being processed by our team</p>
+                </div>
+                
+                <div class="group transform hover:scale-105 transition-all duration-300">
+                    <div class="w-24 h-24 bg-gradient-to-r from-green-500 to-emerald-600 rounded-3xl mx-auto mb-6 flex items-center justify-center shadow-2xl group-hover:shadow-3xl group-hover:rotate-6 transition-all duration-500">
+                        <i class="fas fa-truck text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Delivery</h3>
+                    <p class="text-lg text-gray-600">Expected delivery tomorrow<br><span class="font-semibold text-green-600">10 AM - 2 PM</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white/80 backdrop-blur-sm rounded-3xl p-10 shadow-2xl border border-white/50 max-w-3xl mx-auto mb-16 animate-on-scroll">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Order Summary</h2>
+            <div class="space-y-4 mb-8">
+                <div class="flex justify-between py-4 border-b border-gray-200">
+                    <span class="text-xl font-semibold text-gray-700">Subtotal ({{ cart|length }} items)</span>
+                    <span class="text-2xl font-bold text-gray-900">₹{{ "%.2f"|format(total|default(0, true)|float) }}</span>
+                </div>
+                <div class="flex justify-between py-4 border-b border-gray-200">
+                    <span class="text-xl font-semibold text-gray-700">Delivery Charge</span>
+                    <span class="text-lg font-bold text-green-600">FREE</span>
+                </div>
+                <div class="flex justify-between py-4 border-b border-gray-200">
+                    <span class="text-xl font-semibold text-gray-700">Taxes & Fees</span>
+                    <span class="text-lg font-semibold text-gray-900">Included</span>
+                </div>
+                <div class="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent my-6"></div>
+                <div class="flex justify-between items-center p-6 bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl shadow-inner">
+                    <div>
+                        <span class="text-3xl font-bold text-gray-900 block text-left">Total Amount</span>
+                        <span class="text-lg text-gray-600 block text-left">Paid via Secure Payment</span>
+                    </div>
+                    <span class="text-4xl font-bold text-green-600">₹{{ "%.2f"|format(total|default(0, true)|float) }}</span>
+                </div>
+            </div>
+            
+            <div class="p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl border-2 border-blue-100">
+                <div class="flex items-center justify-center space-x-4">
+                    <div class="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center">
+                        <i class="fas fa-lock text-white text-xl"></i>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <p class="font-bold text-xl text-blue-900">Payment Successful</p>
+                        <p class="text-blue-700 text-sm">Transaction secured with 256-bit SSL encryption</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-6 justify-center items-center max-w-4xl mx-auto mb-20 animate-on-scroll no-print">
+        <a href="{{ url_for('home') }}" 
+           class="flex-1 max-w-md w-full bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white py-6 px-10 rounded-3xl font-bold shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-300 text-xl flex items-center justify-center space-x-3 group">
+            <i class="fas fa-shopping-bag text-2xl group-hover:scale-110 transition-transform"></i>
+            <span>Continue Shopping</span>
+        </a>
+        
+        <button onclick="printReceipt()" 
+                class="flex-1 max-w-md w-full bg-white/90 backdrop-blur-sm border-2 border-gray-200 hover:border-green-500 text-gray-800 hover:text-green-600 py-6 px-10 rounded-3xl font-bold shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 text-xl flex items-center justify-center space-x-3 group cursor-pointer">
+            <i class="fas fa-download text-2xl group-hover:scale-110 transition-transform"></i>
+            <span>Download Receipt</span>
+        </button>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto animate-on-scroll no-print">
+        <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-10 shadow-xl border border-white/50 group hover:shadow-2xl transition-all duration-300">
+            <h3 class="text-2xl font-bold text-gray-900 mb-8 flex items-center justify-center">
+                <i class="fas fa-clock text-green-500 mr-3 text-3xl"></i>
+                What Happens Next
+            </h3>
+            <div class="space-y-6">
+                <div class="flex items-start space-x-4 p-6 bg-blue-50/80 backdrop-blur-sm rounded-2xl border border-blue-100 hover:bg-blue-100 transition-all duration-300">
+                    <div class="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center text-white font-bold text-sm flex-shrink-0 mt-0.5 shadow-lg">1</div>
+                    <div class="flex-1 text-left">
+                        <h4 class="font-semibold text-gray-900 text-lg mb-2">Order Processing</h4>
+                        <p class="text-gray-600 leading-relaxed">Our team will verify and process your order within 30 minutes</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4 p-6 bg-yellow-50/80 backdrop-blur-sm rounded-2xl border border-yellow-100 hover:bg-yellow-100 transition-all duration-300">
+                    <div class="w-10 h-10 bg-yellow-500 rounded-xl flex items-center justify-center text-white font-bold text-sm flex-shrink-0 mt-0.5 shadow-lg">2</div>
+                    <div class="flex-1 text-left">
+                        <h4 class="font-semibold text-gray-900 text-lg mb-2">Quality Check</h4>
+                        <p class="text-gray-600 leading-relaxed">Each item undergoes strict quality inspection before packing</p>
+                    </div>
+                </div>
+                <div class="flex items-start space-x-4 p-6 bg-green-50/80 backdrop-blur-sm rounded-2xl border border-green-100 hover:bg-green-100 transition-all duration-300">
+                    <div class="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center text-white font-bold text-sm flex-shrink-0 mt-0.5 shadow-lg">3</div>
+                    <div class="flex-1 text-left">
+                        <h4 class="font-semibold text-gray-900 text-lg mb-2">Fast Delivery</h4>
+                        <p class="text-gray-600 leading-relaxed">Your order will be delivered tomorrow between 10 AM - 2 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white/70 backdrop-blur-sm rounded-3xl p-10 shadow-xl border border-white/50 group hover:shadow-2xl transition-all duration-300">
+            <h3 class="text-2xl font-bold text-gray-900 mb-8 flex items-center justify-center">
+                <i class="fas fa-headset text-green-500 mr-3 text-3xl"></i>
+                Need Help?
+            </h3>
+            <div class="grid grid-cols-1 gap-6">
+                <div class="p-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-3xl text-white shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer group/contact">
+                    <div class="flex items-center justify-center mb-6">
+                        <i class="fas fa-phone text-4xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-xl font-bold mb-2 text-center">Call Us</p>
+                        <p class="text-3xl font-bold text-center mb-2">+1 (555) 123-4567</p>
+                        <p class="text-lg opacity-95 text-center">24/7 Support</p>
+                    </div>
+                </div>
+                
+                <div class="p-8 bg-gradient-to-br from-emerald-500 to-green-600 rounded-3xl text-white shadow-2xl hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-300 cursor-pointer group/contact">
+                    <div class="flex items-center justify-center mb-6">
+                        <i class="fas fa-envelope text-4xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-xl font-bold mb-2 text-center">Email Us</p>
+                        <p class="text-2xl font-bold text-center mb-2">hello@krishnastore.com</p>
+                        <p class="text-lg opacity-95 text-center">Response within 1 hour</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-24 pt-16 border-t-4 border-green-500/30 bg-white/50 backdrop-blur-sm rounded-3xl p-12 text-center max-w-4xl mx-auto animate-on-scroll no-print">
+        <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_yf3kmbuj.json" background="transparent" speed="1" style="width: 200px; height: 200px; margin: 0 auto;" loop autoplay></lottie-player>
+        <h2 class="text-3xl font-bold text-gray-900 mb-6">Thank You for Choosing Krishna Store! 🌟</h2>
+        <p class="text-xl text-gray-600 mb-12 max-w-2xl mx-auto leading-relaxed">
+            We're excited to bring fresh groceries to your doorstep. Track your order anytime and enjoy your shopping experience!
+        </p>
+        <div class="flex flex-wrap gap-4 justify-center">
+            <a href="{{ url_for('home') }}" class="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white rounded-2xl font-bold shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300">
+                Start New Order
+            </a>
+            <a href="{{ url_for('cart') }}" class="px-8 py-4 border-2 border-gray-300 hover:border-green-500 text-gray-700 hover:text-green-600 rounded-2xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                View Orders
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+function printReceipt() {
+    window.print();
+}
+
+// Confetti animation on load
+document.addEventListener('DOMContentLoaded', function() {
+    // Simple confetti effect
+    const canvas = document.createElement('canvas');
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '9999';
+    document.body.appendChild(canvas);
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const confetti = [];
+    for (let i = 0; i < 100; i++) {
+        confetti.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height - canvas.height,
+            r: Math.random() * 4 + 1,
+            d: Math.random() * 10 + 10,
+            color: `hsl(${Math.random()*360}, 70%, 60%)`,
+            tilt: Math.random() * 10 - 10,
+            tiltAngle: 0
+        });
+    }
+    
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        confetti.forEach((c, i) => {
+            c.tiltAngle += 0.1;
+            c.y += (Math.cos(c.d) + 3 + c.r/2)/2;
+            c.tilt = Math.sin(c.tiltAngle) * 15;
+            
+            if (c.y > canvas.height) c.y = 0;
+            
+            ctx.beginPath();
+            ctx.lineWidth = c.r;
+            ctx.strokeStyle = c.color;
+            ctx.moveTo(c.x + c.tilt + c.r/4, c.y);
+            ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r/4);
+            ctx.stroke();
+        });
+        
+        if (confetti[0].y < canvas.height) {
+            requestAnimationFrame(draw);
+        } else {
+            document.body.removeChild(canvas);
+        }
+    }
+    
+    draw();
+});
+</script>
+
+<style>
+@media print {
+    body * { visibility: hidden; }
+    .print-section, .print-section * { visibility: visible; }
+    .print-section { position: absolute; left: 0; top: 0; width: 100%; }
+    .no-print { display: none !important; }
+}
+</style>
+{% endblock %}
